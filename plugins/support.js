@@ -1,10 +1,10 @@
-const fp = require("fastify-plugin");
+const fp = require('fastify-plugin');
 
 // the use of fastify-plugin is required to be able
 // to export the decorators to the outer scope
 
 module.exports = fp((fastify, opts, next) => {
-  fastify.decorate("someSupport", () => "hugs");
+  fastify.decorate('someSupport', () => 'hugs');
   next();
 });
 

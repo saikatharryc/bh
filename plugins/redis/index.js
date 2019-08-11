@@ -1,5 +1,5 @@
-const fp = require("fastify-plugin");
-const fastifyRedis = require("fastify-redis");
+const fp = require('fastify-plugin');
+const fastifyRedis = require('fastify-redis');
 
 // the use of fastify-plugin is required to be able
 // to export the decorators to the outer scope
@@ -14,35 +14,35 @@ module.exports = fp(async (fastify, opts, next) => {
     .register(fastifyRedis, {
       host: process.env.REDIS_HOST,
       port: process.env.REDIS_PORT,
-      password: process.env.REDIS_PASS
+      password: process.env.REDIS_PASS,
     })
-    .after(err => {
+    .after((err) => {
       if (err) {
-        fastify.log.error("Unable to register redis pluglin");
+        fastify.log.error('Unable to register redis pluglin');
       } else {
         const { redis } = fastify;
 
         // register error event handler
-        redis.on("error", error => {
+        redis.on('error', (error) => {
           fastify.log.error(
-            "Unable to establish connection with redis server",
-            error.message
+            'Unable to establish connection with redis server',
+            error.message,
           );
         });
 
         // register reconnecting event handler
-        redis.on("reconnecting", () => {
-          fastify.log.info("Attempting to reconnect with redis");
+        redis.on('reconnecting', () => {
+          fastify.log.info('Attempting to reconnect with redis');
         });
 
         // register connect event handler
-        redis.on("connect", () => {
+        redis.on('connect', () => {
           fastify.log.info(
-            "Connection with redis established.",
-            "Host :",
+            'Connection with redis established.',
+            'Host :',
             redis.options.host,
-            "Port :",
-            redis.options.port
+            'Port :',
+            redis.options.port,
           );
         });
       }
