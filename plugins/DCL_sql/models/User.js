@@ -1,39 +1,39 @@
 module.exports = (sequelize, Sequelize) => {
   const Users = sequelize.define(
-    "Users",
+    'Users',
     {
       username: {
         type: Sequelize.STRING(50),
         notEmpty: true,
         allowNull: false,
-        comment: "Username"
+        comment: 'Username',
       },
       email: {
         type: Sequelize.STRING(500),
         allowNull: false,
-        comment: "Users email"
+        comment: 'Users email',
       },
       password: {
         type: Sequelize.CHAR(64),
         allowNull: false,
-        comment: "Uers password"
+        comment: 'Uers password',
       },
       OrganizationId: {
         type: Sequelize.STRING(50),
         notEmpty: true,
         allowNull: false,
-        comment: "Organization ID"
+        comment: 'Organization ID',
       },
       RoleId: {
         type: Sequelize.STRING(50),
         notEmpty: true,
         allowNull: false,
-        comment: "Users Role ID"
-      }
+        comment: 'Users Role ID',
+      },
     },
     {
-      tableName: "users"
-    }
+      tableName: 'users',
+    },
   );
   return Users;
 };
