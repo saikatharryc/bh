@@ -9,7 +9,10 @@
   "scripts": {
     "test": "tap test/**/*.test.js",
     "start": "fastify start -l info app.js",
-    "dev": "fastify start -l info -P app.js"
+    "dev": "fastify start -l info -P app.js",
+    "pretty": "prettier --write \"./**/*.{js,jsx,json}\"",
+    "lint": "eslint '**/*.js' --ignore-path .eslintignore",
+    "lint:fix": "eslint '**/*.js' --fix && pretty-quick --staged"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +24,21 @@
     "fastify-cli": "^1.1.0"
   },
   "devDependencies": {
+    "eslint": "^6.1.0",
+    "eslint-config-airbnb": "^18.0.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.14.3",
+    "eslint-plugin-react-hooks": "^1.7.0",
+    "husky": "^2.3.0",
+    "prettier": "1.17.1",
+    "pretty-quick": "^1.11.0",
     "tap": "^12.5.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "eslint '**/*.js' --fix && pretty-quick --staged",
+      "post-commit": "git update-index -g"
+    }
   }
 }
