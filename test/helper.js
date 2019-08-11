@@ -1,9 +1,9 @@
 // This file contains code that we reuse
 // between our tests.
 
-const Fastify = require("fastify");
-const fp = require("fastify-plugin");
-const App = require("../app");
+const Fastify = require('fastify');
+const fp = require('fastify-plugin');
+const App = require('../app');
 // Fill in this config with all the configurations
 // needed for testing the application
 function config() {
@@ -27,5 +27,5 @@ function build(t) {
 
 module.exports = {
   config,
-  build
+  build,
 };
