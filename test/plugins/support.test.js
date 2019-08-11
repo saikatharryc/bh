@@ -1,24 +1,13 @@
 const { test } = require("tap");
 const Fastify = require("fastify");
-const Support = require("../../plugins/support");
+const Auth = require("../../plugins/auth");
 
-test("support works standalone", t => {
-  t.plan(2);
+test("auth generatePasswordHash", async t => {
+  t.plan(1);
   const fastify = Fastify();
-  fastify.register(Support);
-
-  fastify.ready(err => {
-    t.error(err);
-    t.equal(fastify.someSupport(), "hugs");
-  });
+  fastify.register(Auth);
+  await fastify.ready();
+  const passWord = "sa23232";
+  const resultHash = await fastify.generatePasswordHash(passWord);
+  t.equal(await fastify.comparePasswordHash(passWord, resultHash), true);
 });
-
-// If you prefer async/await, use the following
-//
-// test('support works standalone', async (t) => {
-//   const fastify = Fastify()
-//   fastify.register(Support)
-//
-//   await fastify.ready()
-//   t.equal(fastify.someSupport(), 'hugs')
-// })

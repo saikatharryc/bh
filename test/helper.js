@@ -4,7 +4,6 @@
 const Fastify = require("fastify");
 const fp = require("fastify-plugin");
 const App = require("../app");
-
 // Fill in this config with all the configurations
 // needed for testing the application
 function config() {
