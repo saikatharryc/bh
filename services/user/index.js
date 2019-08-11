@@ -1,18 +1,18 @@
-const HttpStatus = require("http-status");
+const HttpStatus = require('http-status');
 
 module.exports = async (fastify, opts, next) => {
   /*
    * Get All active sessions
    */
   fastify.route({
-    url: "/user/activeSession",
-    method: "GET",
+    url: '/user/activeSession',
+    method: 'GET',
     schema: {
       query: {
-        type: "object",
+        type: 'object',
         properties: {},
-        required: []
-      }
+        required: [],
+      },
     },
     preHandler: [fastify.verifySessionId],
     handler: async (request, reply) => {
@@ -26,42 +26,42 @@ module.exports = async (fastify, opts, next) => {
               loginTime: sl[i].sessiondata.loginTime,
               ip: sl[i].sessiondata.ipAddress,
               device: sl[i].sessiondata.device,
-              ref: sl[i].sessiondata.ref
+              ref: sl[i].sessiondata.ref,
             });
           }
           reply.send({
             statusCode: HttpStatus.OK,
             error: false,
-            message: "Active sessions",
+            message: 'Active sessions',
             data: {
-              useractivity: userActivity
-            }
+              useractivity: userActivity,
+            },
           });
         }
       } catch (e) {
         reply
           .status(HttpStatus.INTERNAL_SERVER_ERROR)
-          .send("Internal Server Error - Cannot process the request");
+          .send('Internal Server Error - Cannot process the request');
       }
-    }
+    },
   });
 
   /*
    * Get loggedin user details
    */
   fastify.route({
-    url: "/user/details",
-    method: "GET",
+    url: '/user/details',
+    method: 'GET',
     schema: {
       query: {
-        type: "object",
+        type: 'object',
         properties: {
           id: {
-            type: "string"
-          }
+            type: 'string',
+          },
         },
-        required: []
-      }
+        required: [],
+      },
     },
     preHandler: [fastify.verifySessionId],
     handler: async (request, reply) => {
@@ -70,26 +70,26 @@ module.exports = async (fastify, opts, next) => {
         const userId = request.query.id || request.session.userid;
         fastify
           .getUserDetails(userId)
-          .then(d => {
+          .then((d) => {
             reply.send({
               statusCode: HttpStatus.OK,
               error: false,
-              message: "User Details",
-              data: d
+              message: 'User Details',
+              data: d,
             });
           })
-          .catch(ex => {
+          .catch((ex) => {
             fastify.log.error(ex);
             reply
               .status(HttpStatus.INTERNAL_SERVER_ERROR)
-              .send("UNKNOWN ERROR OCCURED");
+              .send('UNKNOWN ERROR OCCURED');
           });
       } catch (e) {
         reply
           .status(HttpStatus.INTERNAL_SERVER_ERROR)
-          .send("Internal Server Error - Cannot process the request");
+          .send('Internal Server Error - Cannot process the request');
       }
-    }
+    },
   });
 
   next();
