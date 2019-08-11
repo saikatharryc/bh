@@ -26,16 +26,12 @@ module.exports = (fastify, opts, next) => {
     routePrefix: "/documentation",
     swagger: {
       info: {
-        title: "Book CRUD",
+        title: "BH",
         description: "Swagger docs",
         version: "0.1.0"
       },
       consumes: ["application/json"],
       produces: ["application/json"],
-      tags: [
-        { name: "user", description: "User related end-points" },
-        { name: "code", description: "Code related end-points" }
-      ],
       securityDefinitions: {
         apiKey: {
           type: "apiKey",

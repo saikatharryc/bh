@@ -5,7 +5,7 @@ const createError = require("http-errors");
 
 module.exports = async (fastify, opts, next) => {
   fastify.route({
-    url: "/login",
+    url: "/auth/login",
     method: "POST",
     schema: {
       body: {
@@ -80,7 +80,7 @@ module.exports = async (fastify, opts, next) => {
   });
 
   fastify.route({
-    url: "/register",
+    url: "/auth/register",
     method: "POST",
     schema: {
       body: {
