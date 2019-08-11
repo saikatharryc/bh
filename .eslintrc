@@ -1,4 +1,4 @@
 {
     "extends": "airbnb",
-    "rules":{"no-param-reassign":0}
+    "rules":{"no-param-reassign":0,"no-unused-expressions":0}
   }
