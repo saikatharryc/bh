@@ -47,8 +47,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "eslint '**/*.js' --fix && pretty-quick --staged",
-      "post-commit": "git update-index -g"
+      "pre-commit": "eslint '**/*.js' --fix && pretty-quick --staged"
     }
   }
 }
